@@ -10,8 +10,8 @@ package ru.otus.gc;
 @SuppressWarnings({"java:S106", "java:S1144", "java:S125"})
 public class Boxing {
     public static void main(String[] args) throws InterruptedException {
-//        calcInteger();
-                calcInt();
+        //        calcInteger();
+        calcInt();
         System.out.println("done");
     }
 
