@@ -28,15 +28,6 @@ public class EncapsusationDemo {
         String companyName2 = employee.getDepartment().getCompany().getName();
         // см. ниже
 
-
-
-
-
-
-
-
-
-
         // В идеале так
         String companyName3 = employee.getCompanyName();
         // Закон Деметры
@@ -66,13 +57,6 @@ public class EncapsusationDemo {
         // Будут предложения как улучшить код,
         // чтобы избежать подобных ситуаций?
         // см. код ниже ...
-
-
-
-
-
-
-
 
         company.addDepartment(depart);
         // company.removeDepartment(depart);

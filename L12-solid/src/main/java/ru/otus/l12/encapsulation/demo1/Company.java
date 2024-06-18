@@ -1,7 +1,6 @@
 package ru.otus.l12.encapsulation.demo1;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Company {

@@ -1,12 +1,10 @@
 package ru.otus.objectpool;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import ru.otus.singleton.FirstSingleton;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Consumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"java:S106", "java:S1854", "java:S3457"})
 public class ObjectPool<T> {
@@ -34,17 +32,14 @@ public class ObjectPool<T> {
 
         T obj = free.poll();
         if (obj == null) {
-            if (used.size() == this.maxSize)
-                throw new ObjectPoolMaxSizeException(maxSize);
+            if (used.size() == this.maxSize) throw new ObjectPoolMaxSizeException(maxSize);
 
             obj = objectFactory.create();
             pooledObjectInitializer.accept(obj);
         }
         used.offer(obj);
 
-        logger.info(
-                "get() free={} used={} | free={} used={}",
-                freeBefore, usedBefore, free.size(), used.size());
+        logger.info("get() free={} used={} | free={} used={}", freeBefore, usedBefore, free.size(), used.size());
         return obj;
     }
 
@@ -56,9 +51,7 @@ public class ObjectPool<T> {
         used.remove(obj);
         free.add(obj);
 
-        logger.info(
-                "release() free={} used={} | free={} used={}",
-                freeBefore, usedBefore, free.size(), used.size());
+        logger.info("release() free={} used={} | free={} used={}", freeBefore, usedBefore, free.size(), used.size());
     }
 
     /** Первоначальное создание объектов в пуле. */
