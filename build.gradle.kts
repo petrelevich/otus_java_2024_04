@@ -68,6 +68,8 @@ allprojects {
             force("org.sonarsource.analyzer-commons:sonar-analyzer-recognizers:2.8.0.2699")
             force("com.google.code.findbugs:jsr305:3.0.2")
             force("commons-io:commons-io:2.15.1")
+            force("com.google.errorprone:error_prone_annotations:2.26.1")
+                    force("com.google.j2objc:j2objc-annotations:3.0.0")
         }
     }
 }
