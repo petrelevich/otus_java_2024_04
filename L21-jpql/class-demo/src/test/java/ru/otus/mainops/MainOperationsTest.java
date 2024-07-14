@@ -9,7 +9,6 @@ import static ru.otus.core.HibernateUtils.doInSessionWithTransaction;
 
 import jakarta.persistence.EntityExistsException;
 import org.hibernate.LazyInitializationException;
-import org.hibernate.PersistentObjectException;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransientObjectException;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +56,7 @@ class MainOperationsTest {
         var avatar = new Avatar(1L, "http://any-addr.ru/");
         assertThatThrownBy(() -> doInSessionWithTransaction(sf, session -> session.persist(avatar)))
                 .isInstanceOf(EntityExistsException.class);
-                //.isInstanceOf(PersistentObjectException.class);
+        // .isInstanceOf(PersistentObjectException.class);
     }
 
     @DisplayName("persist выкидывает исключение если вставляемая сущность "
