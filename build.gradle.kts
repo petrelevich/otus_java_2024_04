@@ -36,6 +36,12 @@ allprojects {
     val jmh: String by project
     val asm: String by project
     val glassfishJson: String by project
+	
+    val mongodb: String by project
+    val mongodbReactive: String by project
+    val cassandra: String by project
+    val neo4j: String by project
+    val jedis: String by project	
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -50,6 +56,14 @@ allprojects {
             dependency("org.openjdk.jmh:jmh-generator-annprocess:$jmh")
             dependency("org.glassfish:jakarta.json:$glassfishJson")
             dependency("org.ow2.asm:asm-commons:$asm")
+			
+			dependency("com.datastax.oss:java-driver-core:$cassandra")
+            dependency("org.mongodb:mongodb-driver-core:$mongodb")
+            dependency("org.mongodb:mongodb-driver-sync:$mongodb")
+            dependency("org.mongodb:bson:$mongodb")
+            dependency("org.mongodb:mongodb-driver-reactivestreams:${mongodbReactive}")
+            dependency("org.neo4j.driver:neo4j-java-driver:$neo4j")
+            dependency("redis.clients:jedis:$jedis")
         }
     }
 
