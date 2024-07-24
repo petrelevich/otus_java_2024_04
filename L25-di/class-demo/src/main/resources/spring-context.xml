@@ -8,8 +8,8 @@
     <util:constant id = "out" static-field="java.lang.System.out"/>
 
     <bean id="ioService" class="ru.otus.services.IOServiceStreams">
-        <constructor-arg name="in" ref="in" />
         <constructor-arg name="out" ref="out" />
+        <constructor-arg name="in" ref="in" />
     </bean>
 
     <bean id="equationPreparer" class="ru.otus.services.EquationPreparerImpl" />
