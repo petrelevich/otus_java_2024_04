@@ -12,7 +12,7 @@ import java.util.Collections;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.UserAuthService;
 
-@SuppressWarnings({"squid:S1948"})
+@SuppressWarnings({"java:S1989"})
 public class LoginServlet extends HttpServlet {
 
     private static final String PARAM_LOGIN = "login";
@@ -20,8 +20,8 @@ public class LoginServlet extends HttpServlet {
     private static final int MAX_INACTIVE_INTERVAL = 30;
     private static final String LOGIN_PAGE_TEMPLATE = "login.html";
 
-    private final TemplateProcessor templateProcessor;
-    private final UserAuthService userAuthService;
+    private final transient TemplateProcessor templateProcessor;
+    private final transient UserAuthService userAuthService;
 
     public LoginServlet(TemplateProcessor templateProcessor, UserAuthService userAuthService) {
         this.userAuthService = userAuthService;

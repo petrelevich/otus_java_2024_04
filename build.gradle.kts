@@ -48,6 +48,12 @@ allprojects {
 
     val reflections: String by project
 
+    val sockjs: String by project
+    val stomp: String by project
+    val bootstrap: String by project
+    val springDocOpenapiUi: String by project
+    val jsr305: String by project
+
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
         dependencies {
@@ -80,6 +86,12 @@ allprojects {
             dependency("org.freemarker:freemarker:$freemarker")
 
             dependency("org.reflections:reflections:$reflections")
+
+            dependency("org.webjars:sockjs-client:$sockjs")
+            dependency("org.webjars:stomp-websocket:$stomp")
+            dependency("org.webjars:bootstrap:$bootstrap")
+            dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenapiUi")
+            dependency("com.google.code.findbugs:jsr305:$jsr305")
         }
     }
 

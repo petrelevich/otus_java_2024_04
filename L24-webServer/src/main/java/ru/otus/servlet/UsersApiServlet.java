@@ -9,13 +9,13 @@ import java.io.IOException;
 import ru.otus.dao.UserDao;
 import ru.otus.model.User;
 
-@SuppressWarnings({"squid:S1948"})
+@SuppressWarnings({"java:S1989"})
 public class UsersApiServlet extends HttpServlet {
 
     private static final int ID_PATH_PARAM_POSITION = 1;
 
-    private final UserDao userDao;
-    private final Gson gson;
+    private final transient UserDao userDao;
+    private final transient Gson gson;
 
     public UsersApiServlet(UserDao userDao, Gson gson) {
         this.userDao = userDao;

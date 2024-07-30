@@ -9,7 +9,7 @@ import ru.otus.mongodemo.helpers.ReactiveMongoHelper;
 import ru.otus.mongodemo.subscribers.ObservableSubscriber;
 import ru.otus.mongodemo.subscribers.ObservableSubscriberChangeDocument;
 
-@SuppressWarnings("squid:S106")
+@SuppressWarnings({"squid:S106", "java:S6881"})
 public class DemoPublishSubscribe {
 
     public static final String MONGODB_URL = "mongodb://localhost:30001"; // Работа без DockerToolbox
