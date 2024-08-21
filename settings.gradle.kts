@@ -58,6 +58,9 @@ include ("L27-websocket:application")
 include ("L28-springDataJdbc")
 include ("L29-threads")
 
+include ("L29-Threads")
+include ("L30-JMM")
+
 pluginManagement {
     val jgitver: String by settings
     val dependencyManagement: String by settings
