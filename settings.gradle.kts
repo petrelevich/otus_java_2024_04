@@ -60,6 +60,7 @@ include ("L29-threads")
 
 include ("L29-Threads")
 include ("L30-JMM")
+include ("L31-executors")
 
 pluginManagement {
     val jgitver: String by settings
