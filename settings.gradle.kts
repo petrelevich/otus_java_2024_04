@@ -63,6 +63,11 @@ include ("L31-executors")
 include ("L32-concurrentCollections:ConcurrentCollections")
 include ("L32-concurrentCollections:QueueDemo")
 
+include ("L33-multiprocess:processes-demo")
+include ("L33-multiprocess:sockets-demo")
+include ("L33-multiprocess:rmi-demo")
+include ("L33-multiprocess:grpc-demo")
+
 pluginManagement {
     val jgitver: String by settings
     val dependencyManagement: String by settings
