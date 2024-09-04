@@ -7,14 +7,13 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("java:S125")
 public class ExecutorServiceDemo {
     private static final Logger logger = LoggerFactory.getLogger(ExecutorServiceDemo.class);
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-//         new ExecutorServiceDemo().singleThread();
-//         new ExecutorServiceDemo().newFixedThreadPool();
-         new ExecutorServiceDemo().scheduledThreadPoolExecutor();
+        new ExecutorServiceDemo().singleThread();
+        new ExecutorServiceDemo().newFixedThreadPool();
+        new ExecutorServiceDemo().scheduledThreadPoolExecutor();
     }
 
     private String task(int id) {
@@ -27,62 +26,54 @@ public class ExecutorServiceDemo {
         return "done " + id;
     }
 
-    @SuppressWarnings("java:S2095") // до переезда на java 21
     void singleThread() throws ExecutionException, InterruptedException {
         // Один поток выполняет задачи из внутренней НЕОГРАНИЧЕННОЙ очереди
-        var executor = Executors.newSingleThreadExecutor();
-        var resultInFuture1 = executor.submit(() -> task(1));
-        logger.info("task1 submitted");
+        try (var executor = Executors.newSingleThreadExecutor()) {
+            var resultInFuture1 = executor.submit(() -> task(1));
+            logger.info("task1 submitted");
 
-        var resultInFuture2 = executor.submit(() -> task(2));
-        logger.info("task2 submitted");
+            var resultInFuture2 = executor.submit(() -> task(2));
+            logger.info("task2 submitted");
 
-        var resultInFuture3 = executor.submit(() -> task(3));
-        logger.info("task3 submitted");
+            var resultInFuture3 = executor.submit(() -> task(3));
+            logger.info("task3 submitted");
 
-        var result1 = resultInFuture1.get();
-        var result2 = resultInFuture2.get();
-        var result3 = resultInFuture3.get();
+            var result1 = resultInFuture1.get();
+            var result2 = resultInFuture2.get();
+            var result3 = resultInFuture3.get();
 
-        logger.info("result1:{}", result1);
-        logger.info("result2:{}", result2);
-        logger.info("result3:{}", result3);
-
-        executor.shutdown();
+            logger.info("result1:{}", result1);
+            logger.info("result2:{}", result2);
+            logger.info("result3:{}", result3);
+        }
     }
 
-    @SuppressWarnings("java:S2095") // до переезда на java 21
     void newFixedThreadPool() throws ExecutionException, InterruptedException {
         // Заданное количество потоков выполняют задачи из внутренней НЕОГРАНИЧЕННОЙ очереди
-        var executor = Executors.newFixedThreadPool(1);
-        var resultInFuture1 = executor.submit(() -> task(1));
-        logger.info("task1 submitted");
+        try (var executor = Executors.newFixedThreadPool(3)) {
+            var resultInFuture1 = executor.submit(() -> task(1));
+            logger.info("task1 submitted");
 
-        var resultInFuture2 = executor.submit(() -> task(2));
-        logger.info("task2 submitted");
+            var resultInFuture2 = executor.submit(() -> task(2));
+            logger.info("task2 submitted");
 
-        var resultInFuture3 = executor.submit(() -> task(3));
-        logger.info("task3 submitted");
+            var resultInFuture3 = executor.submit(() -> task(3));
+            logger.info("task3 submitted");
 
-        var result1 = resultInFuture1.get();
-        var result2 = resultInFuture2.get();
-        var result3 = resultInFuture3.get();
+            var result1 = resultInFuture1.get();
+            var result2 = resultInFuture2.get();
+            var result3 = resultInFuture3.get();
 
-        logger.info("result1:{}", result1);
-        logger.info("result2:{}", result2);
-        logger.info("result3:{}", result3);
-
-        executor.shutdown();
+            logger.info("result1:{}", result1);
+            logger.info("result2:{}", result2);
+            logger.info("result3:{}", result3);
+        }
     }
 
-    @SuppressWarnings("java:S2095") // до переезда на java 21
     void scheduledThreadPoolExecutor() {
         // Заданное количество потоков выполняют задачи с задержкой или периодически
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(() -> logger.info("task is done"),
-                0, 3, TimeUnit.SECONDS);
-
-        executor.scheduleAtFixedRate(() -> logger.info("task is done 2"),
-                0, 2, TimeUnit.SECONDS);
+        try (ScheduledExecutorService executor = Executors.newScheduledThreadPool(1)) {
+            executor.scheduleAtFixedRate(() -> logger.info("task is done"), 0, 3, TimeUnit.SECONDS);
+        }
     }
 }

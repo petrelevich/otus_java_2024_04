@@ -6,7 +6,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("java:S1144")
 public class ReentrantLockDemo {
     private static final Logger logger = LoggerFactory.getLogger(ReentrantLockDemo.class);
 
@@ -21,7 +20,7 @@ public class ReentrantLockDemo {
         t1.setName("t1");
         t1.start();
 
-        var t2 = new Thread(this::criticalSection);
+        var t2 = new Thread(this::criticalSectionDoubleLock);
         t2.setName("t2");
         t2.start();
 
@@ -30,32 +29,32 @@ public class ReentrantLockDemo {
     }
 
     private void criticalSection() {
-        logger.info("before critical section");
+        logger.info("1. before critical section");
         lock.lock();
         try {
-            logger.info("in the critical section");
+            logger.info("1. in the critical section");
             sleep();
         } finally {
-            logger.info("unlock1");
+            logger.info("1. unlock");
             lock.unlock();
         }
-        logger.info("after critical section");
+        logger.info("1. after critical section");
     }
 
     private void criticalSectionDoubleLock() {
-        logger.info("before critical section");
+        logger.info("2. before critical section");
         lock.lock();
-        logger.info("reentrant into locked section");
+        logger.info("2. reentrant into locked section");
         lock.lock();
         try {
-            logger.info("in the critical section");
+            logger.info("2. in the critical section");
             sleep();
         } finally {
             // сколько раз заблокировали, столько надо и разблокировать
             lock.unlock();
             lock.unlock();
         }
-        logger.info("after critical section");
+        logger.info("2. after critical section");
     }
 
     private static void sleep() {

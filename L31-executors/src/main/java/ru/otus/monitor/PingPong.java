@@ -7,11 +7,11 @@ public class PingPong {
     private static final Logger logger = LoggerFactory.getLogger(PingPong.class);
     private String last = "PONG";
 
-    private void action(String message) {
+    private synchronized void action(String message) {
         while (!Thread.currentThread().isInterrupted()) {
             try {
-//                 spurious wakeup https://en.wikipedia.org/wiki/Spurious_wakeup
-//                 поэтому не if
+                // spurious wakeup https://en.wikipedia.org/wiki/Spurious_wakeup
+                // поэтому не if
                 while (last.equals(message)) {
                     this.wait();
                 }
@@ -29,19 +29,8 @@ public class PingPong {
 
     public static void main(String[] args) {
         PingPong pingPong = new PingPong();
-        new Thread(() -> pingPong.action("PONG")).start();
-        sleepHalf();
         new Thread(() -> pingPong.action("ping")).start();
-
-    }
-
-    private static void sleepHalf() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            logger.error(e.getMessage());
-            Thread.currentThread().interrupt();
-        }
+        new Thread(() -> pingPong.action("PONG")).start();
     }
 
     private static void sleep() {
