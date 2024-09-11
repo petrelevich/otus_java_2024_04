@@ -75,6 +75,13 @@ include ("L34-rabbitMQ:mainService")
 include ("L35-NIO")
 include ("L36-netty")
 
+include ("L37-webflux:source")
+include ("L37-webflux:processor")
+include ("L37-webflux:client")
+include ("L37-webflux-chat:client-service")
+include ("L37-webflux-chat:datastore-service")
+
+
 pluginManagement {
     val jgitver: String by settings
     val dependencyManagement: String by settings
